@@ -1,5 +1,7 @@
 1) unique()
 
+# Костыль с закосом на bubble-sorting
+
 def unique(my_list):
     my_list = list(my_list)
     z = len(my_list) - 1
@@ -9,6 +11,16 @@ def unique(my_list):
                     my_list[j], my_list[j+1] = my_list[j+1], my_list[j]
     my_list = list(set(my_list))
     my_list.sort()
+    return my_list
+
+# Так короче...
+
+def unique(e):
+    my_list = []
+    for i in e:
+        if i not in my_list:
+            my_list.append(i)
+            my_list.sort()
     return my_list
 
 print(unique([1, 2, 1, 3])) # [1, 2, 3]
