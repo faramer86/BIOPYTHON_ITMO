@@ -1,4 +1,4 @@
-1) unique()
+#1) unique()
 
 # Костыль с закосом на bubble-sorting
 
@@ -29,7 +29,7 @@ print(unique('adsfasdf')) # ['a', 'd', 'f', 's']
 
 ##########################################################
 
-2) transposeDict()
+#2) transposeDict()
 
 def transposeDict(d):
     d_new = dict()
@@ -43,7 +43,7 @@ print(transposeDict({})) # {}
 
 ##########################################################
 
-3) mex()
+#3) mex()
 
 def mex(e):
     a = 1
@@ -59,7 +59,7 @@ print(mex([0, 0, 1, 0])) # 2
 
 ##########################################################
 
-4) frequencyDict()
+#4) frequencyDict()
 
 def frequencyDict(s):
     dict_new = dict()
