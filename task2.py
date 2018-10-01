@@ -13,7 +13,7 @@ if __name__ == '__main__':
         assert listToString([1, 2, 3]) == "[1, 2, 3]", 'Test2 fail!'
         assert listToString([-5]) == "[-5]", 'Test3 fail!'
 
-test_listStrings()
+        test_listStrings()
 
 ##############################################################################
 
@@ -35,7 +35,7 @@ if __name__ == '__main__':
                                       '|def|',
                                       '+---+'], 'Test fail!'
 
-test_addBorder()
+    test_addBorder()
 
 ##############################################################################
 
@@ -54,7 +54,7 @@ if __name__ == '__main__':
                          'pneumonoultramicroscopicsilicovolcanoconiosis']
             ) == ['word', 'l10n', 'i18n', 'p43s'], 'Test1 fail!'
 
-test_shorting()
+    test_shorting()
 
 ##############################################################################
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         assert competition([1, 0, 0, 0], 3) == 1, 'Test2 fail!'
         assert competition([10, 9, 8, 7, 7, 7, 5, 5], 4) == 6, 'Test3 fail!'
 
-test_competition()
+    test_competition()
 
 ##############################################################################
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         assert goodPairs([7, 8, 9], [5, 3, 2]) == [], 'Test3 fail!'
 
 
-test_competition()
+    test_competition()
 
 ##############################################################################
 
@@ -129,4 +129,4 @@ if __name__ == '__main__':
         assert makeShell(3) == [[0], [0, 0], [0, 0, 0], [0, 0], [0]], (
                 'Test2 fail!')
 
-test_makeShell()
+    test_makeShell()
