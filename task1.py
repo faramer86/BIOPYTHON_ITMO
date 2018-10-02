@@ -35,13 +35,10 @@ if __name__ == '__main__':
         assert unique({5, 1, 3}) == [1, 3, 5], 'Error in set'
         print('We have no trouble with sets')
 
-    '''
-    Запуск тестов:
-    unique(7)
     test_list_unique()
     test_str_unique()
     test_set_unique()
-    '''
+    
 
 print(unique([1, 2, 1, 3]))  # [1, 2, 3]
 print(unique({5, 1, 3}))  # [1, 3, 5]
@@ -79,10 +76,8 @@ if __name__ == '__main__':
         assert transposeDict({}) == {}, 'ErrorDict'
         print('We have no trouble with dict number three')
 
-    '''
-    Запуск тестов:
     test_transposeDict()
-    '''
+    
 
 print(transposeDict({1: 'a', 2: 'b'}))  # {'a': 1, 'b': 2}
 print(transposeDict({1: 1}))  # {1: 1}
@@ -115,10 +110,8 @@ if __name__ == '__main__':
         assert mex([0, 0, 1, 0]) == 2, 'Test3 - your answer is wrong!'
         print('We have no trouble with dict number three')
 
-    '''
-    Запуск тестов:
     test_mex()
-    '''
+    
 
 print(mex([1, 2, 3]))  # 4
 print(mex(['asdf', 123]))  # 1
@@ -147,10 +140,8 @@ if __name__ == '__main__':
         assert frequencyDict('abacab') == {'a': 3, 'b': 2, 'c': 1}, 'Test2Fail'
         print('We have no trouble with test number two')
 
-    '''
-    Запуск тестов:
     test_frequencyDict()
-    '''
+    
 
 print(frequencyDict(''))  # {}
 print(frequencyDict('abacaba'))  # {'a': 4, 'b': 2, 'c': 1}
