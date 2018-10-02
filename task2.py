@@ -64,13 +64,11 @@ if __name__ == '__main__':
 
 def competition(e, k):
     assert isinstance(e, list), "e - Это не список!"
-    new_list = e[0:-k]
-    min_score = e[-k-1]
-    count_min_participants = e.count(min_score)
-    if count_min_participants == 1:
-        return len(new_list)
-    else:
-        return len(new_list)+count_min_participants-1
+    new_list = []
+    for i in e:
+        if i >= e[k] and i != 0:
+            new_list.append(i)
+    return len(new_list)
 
 if __name__ == '__main__':
     def test_competition():
@@ -93,6 +91,7 @@ def goodPairs(a, b):
         for j in b:
             if (i*j) % (i+j) == 0:
                 new_list.append(i**2+j**2)
+    new_list.sort()
     return new_list
 
 if __name__ == '__main__':
