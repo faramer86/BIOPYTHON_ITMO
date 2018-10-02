@@ -7,6 +7,7 @@ def unique(e):
         Добавлю try/except, чтобы проверить, является ли подаваемый объект ите-
         рируемым. iff в условии сказано, что по объекту можно итерироваться.
         '''
+
         iter(e)
         my_list = []
         for i in e:
@@ -41,6 +42,7 @@ if __name__ == '__main__':
     test_str_unique()
     test_set_unique()
     '''
+
 print(unique([1, 2, 1, 3]))  # [1, 2, 3]
 print(unique({5, 1, 3}))  # [1, 3, 5]
 print(unique('adsfasdf'))  # ['a', 'd', 'f', 's']
@@ -55,6 +57,7 @@ def transposeDict(d):
     Добавлю assert, чтобы проверить, является ли подаваемый объект словарем. В
     случае использования функции на другом типе данных, выдает ошибку.
     '''
+
     assert type(d) is dict, 'your variable is not dictionary!'
     d_new = dict()
     for key, value in d.items():
@@ -80,6 +83,7 @@ if __name__ == '__main__':
     Запуск тестов:
     test_transposeDict()
     '''
+
 print(transposeDict({1: 'a', 2: 'b'}))  # {'a': 1, 'b': 2}
 print(transposeDict({1: 1}))  # {1: 1}
 print(transposeDict({}))  # {}
@@ -115,6 +119,7 @@ if __name__ == '__main__':
     Запуск тестов:
     test_mex()
     '''
+
 print(mex([1, 2, 3]))  # 4
 print(mex(['asdf', 123]))  # 1
 print(mex([0, 0, 1, 0]))  # 2
@@ -146,5 +151,6 @@ if __name__ == '__main__':
     Запуск тестов:
     test_frequencyDict()
     '''
+
 print(frequencyDict(''))  # {}
 print(frequencyDict('abacaba'))  # {'a': 4, 'b': 2, 'c': 1}
