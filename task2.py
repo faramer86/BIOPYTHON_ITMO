@@ -49,10 +49,11 @@ def shorting(e):
 
 if __name__ == '__main__':
     def test_shorting():
-        assert shorting(['word', 'localization',
+        assert shorting(['word',
+                         'localization',
                          'internationalization',
-                         'pneumonoultramicroscopicsilicovolcanoconiosis']
-            ) == ['word', 'l10n', 'i18n', 'p43s'], 'Test1 fail!'
+                         'pneumonoultramicroscopicsilicovolcanoconiosis']) == [
+              'word', 'l10n', 'i18n', 'p43s'], 'Test1 fail!'
 
     test_shorting()
 
@@ -96,11 +97,10 @@ def goodPairs(a, b):
 
 if __name__ == '__main__':
     def test_goodPairs():
-        assert goodPairs([4, 5, 6, 7, 8], [8, 9, 10, 11, 12]
-        ) == [128, 160, 180], 'Test1 fail!'
+        assert goodPairs([4, 5, 6, 7, 8], [8, 9, 10, 11, 12]) == [
+                128, 160, 180], 'Test1 fail!'
         assert goodPairs([2], [2]) == [8], 'Test2 fail!'
         assert goodPairs([7, 8, 9], [5, 3, 2]) == [], 'Test3 fail!'
-
 
     test_competition()
 
