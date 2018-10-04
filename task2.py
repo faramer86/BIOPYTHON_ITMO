@@ -2,10 +2,8 @@
 
 
 def listToString(a):
-    assert isinstance(a, list), "a - Это не список!"
-    a = str(a)
-    assert isinstance(a, str), "И не строка!"
-    return a
+    assert type(a) == list, "a - Это не список!"
+    return str(a)
 
 if __name__ == '__main__':
     def test_listStrings():
