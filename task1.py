@@ -38,11 +38,6 @@ if __name__ == '__main__':
     test_list_unique()
     test_str_unique()
     test_set_unique()
-    
-
-print(unique([1, 2, 1, 3]))  # [1, 2, 3]
-print(unique({5, 1, 3}))  # [1, 3, 5]
-print(unique('adsfasdf'))  # ['a', 'd', 'f', 's']
 
 ##########################################################
 
@@ -77,11 +72,6 @@ if __name__ == '__main__':
         print('We have no trouble with dict number three')
 
     test_transposeDict()
-    
-
-print(transposeDict({1: 'a', 2: 'b'}))  # {'a': 1, 'b': 2}
-print(transposeDict({1: 1}))  # {1: 1}
-print(transposeDict({}))  # {}
 
 ##########################################################
 
@@ -111,11 +101,6 @@ if __name__ == '__main__':
         print('We have no trouble with dict number three')
 
     test_mex()
-    
-
-print(mex([1, 2, 3]))  # 4
-print(mex(['asdf', 123]))  # 1
-print(mex([0, 0, 1, 0]))  # 2
 
 ##########################################################
 
@@ -141,7 +126,3 @@ if __name__ == '__main__':
         print('We have no trouble with test number two')
 
     test_frequencyDict()
-    
-
-print(frequencyDict(''))  # {}
-print(frequencyDict('abacaba'))  # {'a': 4, 'b': 2, 'c': 1}
