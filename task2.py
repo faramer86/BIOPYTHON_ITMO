@@ -91,8 +91,7 @@ def goodPairs(a, b):
         for j in b:
             if (i*j) % (i+j) == 0:
                 new_list.append(i**2+j**2)
-    new_list.sort()
-    return new_list
+    return sorted(set(new_list))
 
 if __name__ == '__main__':
     def test_goodPairs():
@@ -101,7 +100,7 @@ if __name__ == '__main__':
         assert goodPairs([2], [2]) == [8], 'Test2 fail!'
         assert goodPairs([7, 8, 9], [5, 3, 2]) == [], 'Test3 fail!'
 
-    test_competition()
+    test_goodPairs()
 
 ##############################################################################
 
