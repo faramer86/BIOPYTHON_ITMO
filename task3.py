@@ -24,7 +24,9 @@ def evens(x):
 
 
 def digitsumdiv(p):
-    yield from itertools.count(p, p)
+    for i in itertools.count(1):
+        if sum(map(int, str(i))) % p == 0:
+            yield i
 
 #   2
 #   Implement the following functions in file task3/task3.py
