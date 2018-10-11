@@ -11,9 +11,9 @@ def squares(a):
 
 
 def repeatntimes(elems, n):
-    elems = list(elems)
     for i in range(n):
-        yield from elems
+        for j in elems:
+            yield j
 
 
 def evens(x):
