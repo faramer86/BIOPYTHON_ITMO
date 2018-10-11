@@ -11,6 +11,7 @@ def squares(a):
 
 
 def repeatntimes(elems, n):
+    elems = list(elems)
     for i in range(n):
         yield from elems
 
