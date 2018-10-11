@@ -42,5 +42,5 @@ def changecase(s):
 
 
 def productif(elems, conds):
-    return reduce(lambda x, y: x*y, list(map(lambda x, y: x if y is True
-                                             else 1, elems, conds)))
+    return reduce(lambda x, y: x*y, map(lambda x: x[0] if x[1] else 1,
+                                        zip(elems, conds)), 1)
