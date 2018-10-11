@@ -28,6 +28,7 @@ def digitsumdiv(p):
         if sum(map(int, str(i))) % p == 0:
             yield i
 
+
 #   2
 #   Implement the following functions in file task3/task3.py
 #   using map, filter, zip, reduce:
