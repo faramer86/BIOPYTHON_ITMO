@@ -48,19 +48,35 @@ def ackermann(m, n):
     return ackermann(m-1, ackermann(m, n - 1))
 
 
+def drawborders(n):
+    if n <= 1:
+        return ['+']
+    else:
+        result = ['+' + '-' * (n - 2) + '+'] * 2
+        priv = drawborders(n - 2)
+        for i in range(1, n - 1):
+            result.insert(i, '|' + priv[i - 1] + '|')
+        return result
+
+
 def genbinarystrings(n):
-    bin_str = [''.join(p) for p in product('10', repeat=n)]
-    bin_str.sort(key=lambda s: s.count('1'))
-    return bin_str
+    result = []
+    if n == 0:
+        return ['']
+    else:
+        for e in genbinarystrings(n-1):
+            result.append(e+"0")
+            result.append(e+"1")
+        return result
 
 
-def istpower(n):
+def istwpower(n):
     if n <= 0:
         return False
     elif n == 1:
         return True
     elif n % 2 == 0:
-        return istpower(n // 2)
+        return istwpower(n // 2)
     else:
         return False
 
@@ -69,14 +85,14 @@ def concatnumbers(a, b):
     if b // 10 == 0:
         return a * 10 + b
     else:
-        return round(concatnumbers(a, b/10) * 10, 1)
+        return concatnumbers(a, b // 10) * 10 + b % 10
 
 
-def buttock(n):
+def abacaba(n):
     if n == 1:
         return [1]
     else:
-        return buttock(n-1) + [n] + buttock(n-1)
+        return abacaba(n-1) + [n] + abacaba(n-1)
 
 
 def parentheses(s):
@@ -87,13 +103,7 @@ def parentheses(s):
 
 
 def gcd(a, b):
-    if a == b:
-        return a
-    else:
-        if a > b:
-            return gcd(a - b, b)
-        else:
-            return gcd(a, b - a)
+    return (b and gcd(b, a % b)) or a
 
 
 def mergesort(unsorted_list):
