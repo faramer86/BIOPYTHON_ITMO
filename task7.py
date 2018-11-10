@@ -43,7 +43,7 @@ def subpalindrome(Str):
         left = subpalindrome(Str[: -1])
         right = subpalindrome(Str[1: ])
         recursedList =[left, right]
-        cache[Str] = max(recursedList, key=len) 
+        cache[Str] = max(sorted(recursedList, reverse = False), key = len) 
         return cache[Str]
 
 # 5th
