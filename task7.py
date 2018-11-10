@@ -50,12 +50,15 @@ def subpalindrome(Str):
 
 
 def isIPv4(s):
-    new_list = s.split('.')
-    new_list = list(map(lambda x: int(x).bit_length(), new_list))
-    new_list = list(filter(lambda x: x <= 8, new_list))
-    if len(new_list) == 4:
-        return True
-    else:
+    try:
+        new_list = s.split('.')
+        new_list = list(map(lambda x: int(x).bit_length(), new_list))
+        new_list = list(filter(lambda x: x <= 8, new_list))
+        if len(new_list) == 4:
+            return True
+        else:
+            return False
+    except:
         return False
 
 # 6th
