@@ -1,10 +1,9 @@
-
-
 from functools import reduce
+import itertools
 
 # EASY
 
-# First
+# 1st
 
 
 def valuesunion(*dicts):
@@ -14,14 +13,14 @@ def valuesunion(*dicts):
             l.append(j)
     return set(l)
 
-# Second
+# 2nd
 
 
 def popcount(n):
     a = bin(n)
     return a.count('1')
 
-# Third
+# 3rd
 
 
 def powers(n, m):
@@ -35,16 +34,20 @@ def powers(n, m):
 
 def subpalindrome(Str):
     cache = {}
-    if Str in cache.keys():
-        return cache[Str]
-    if Str == Str[::-1]:
-        return Str
-    else:
-        left = subpalindrome(Str[: -1])
-        right = subpalindrome(Str[1: ])
-        recursedList =[left, right]
-        cache[Str] = max(sorted(recursedList, reverse = False), key = len) 
-        return cache[Str]
+    def noncache(Str):
+        if Str in cache.keys():
+            return cache[Str]
+        if Str == Str[::-1]:
+            return Str
+        else:
+            left = noncache(Str[: -1])
+            right = noncache(Str[1: ])
+            recursedList =[left, right]
+            cache[Str] = max(recursedList, key=len) 
+            return cache[Str]
+    return noncache(Str)
+
+
 
 # 5th
 
@@ -52,6 +55,11 @@ def subpalindrome(Str):
 def isIPv4(s):
     try:
         new_list = s.split('.')
+        for number in new_list:
+            if number.isdigit():
+                continue
+            else:
+                return False
         new_list = list(map(lambda x: int(x).bit_length(), new_list))
         new_list = list(filter(lambda x: x <= 8, new_list))
         if len(new_list) == 4:
@@ -60,18 +68,53 @@ def isIPv4(s):
             return False
     except:
         return False
-
+        
 # 6th
 
-# HAS NO TIME
-
+def pascals():
+    prev = (1,)
+    for i in itertools.count(1):
+        act = []
+        act.append(1)
+        for k in range(len(prev) - 1):
+            act.append(prev[k] + prev[k + 1])
+        act.append(1)
+        yield tuple(prev)
+        prev = act
+    
 # HARD 
 
-# 1
+# 1st
 
-# 2
+def spiral(n):
+    mat = [[0]*n for i in range(n)]
+    st, m = 1, 0
+    mat[n//2][n//2]=n*n
+    for v in range(n//2):
+        
+        # Up
+        for i in range(n-m):
+            mat[v][i+v] = st
+            st+=1
+            
+        # Right    
+        for i in range(v+1, n-v):
+            mat[i][-v-1] = st
+            st+=1
+            
+        # Down
+        for i in range(v+1, n-v):
+            mat[-v-1][-i-1] =st
+            st+=1
+            
+        # Left
+        for i in range(v+1, n-(v+1)):
+            mat[-i-1][v]=st
+            st+=1
+        m+=2
+    return mat
 
+# 2nd
 
 def fibonacci(n):
     return reduce(lambda x, n: [x[1], x[0] + x[1]], range(n), [0,1])[0]
-
