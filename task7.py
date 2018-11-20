@@ -34,20 +34,19 @@ def powers(n, m):
 
 def subpalindrome(Str):
     cache = {}
+
     def noncache(Str):
         if Str in cache.keys():
             return cache[Str]
         if Str == Str[::-1]:
             return Str
         else:
-            left = noncache(Str[: -1])
-            right = noncache(Str[1: ])
-            recursedList =[left, right]
-            cache[Str] = max(recursedList, key=len) 
+            left = noncache(Str[:-1])
+            right = noncache(Str[1:])
+            recursedList = [left, right]
+            cache[Str] = max(recursedList, key=len)
             return cache[Str]
     return noncache(Str)
-
-
 
 # 5th
 
@@ -68,8 +67,9 @@ def isIPv4(s):
             return False
     except:
         return False
-        
+
 # 6th
+
 
 def pascals():
     prev = (1,)
@@ -81,40 +81,69 @@ def pascals():
         act.append(1)
         yield tuple(prev)
         prev = act
-    
-# HARD 
+
+# HARD
 
 # 1st
 
+
 def spiral(n):
-    mat = [[0]*n for i in range(n)]
+    mat = [[0] * n for i in range(n)]
     st, m = 1, 0
-    mat[n//2][n//2]=n*n
-    for v in range(n//2):
-        
+    mat[n // 2][n // 2] = n * n
+    for v in range(n // 2):
         # Up
         for i in range(n-m):
-            mat[v][i+v] = st
-            st+=1
-            
-        # Right    
-        for i in range(v+1, n-v):
+            mat[v][i + v] = st
+            st += 1
+        # Right
+        for i in range(v + 1, n - v):
             mat[i][-v-1] = st
-            st+=1
-            
+            st += 1
         # Down
-        for i in range(v+1, n-v):
-            mat[-v-1][-i-1] =st
-            st+=1
-            
+        for i in range(v + 1, n - v):
+            mat[- v - 1][- i - 1] = st
+            st += 1
         # Left
-        for i in range(v+1, n-(v+1)):
-            mat[-i-1][v]=st
-            st+=1
-        m+=2
+        for i in range(v + 1, n - (v + 1)):
+            mat[- i - 1][v] = st
+            st += 1
+        m += 2
     return mat
 
 # 2nd
 
+
 def fibonacci(n):
-    return reduce(lambda x, n: [x[1], x[0] + x[1]], range(n), [0,1])[0]
+    return reduce(lambda x, n: [x[1], x[0] + x[1]], range(n), [0, 1])[0]
+
+# 3rd
+
+
+def bruckets2(n, m):
+    string = ''
+    string += '()'*n
+    string += '[]'*m
+    cache = []
+    count1 = 0
+    count2 = 0
+    for i in itertools.permutations(string, 2*(n+m)):
+        result = True
+        for j in list(i):
+            if j == ')':
+                count1 -= 1
+                if count1 < 0:
+                    result = False
+            if j == ']':
+                count2 -= 1
+                if count2 < 0:
+                    result = False
+            if j == '(':
+                count1 += 1
+            if j == '[':
+                count2 += 1
+        if result is True:
+            print(i)
+            result = True
+        count1 = 0
+        count2 = 0
