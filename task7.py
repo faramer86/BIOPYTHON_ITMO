@@ -120,7 +120,7 @@ def fibonacci(n):
 # 3rd
 
 
-def bruckets2(n, m):
+def brackets2(n, m):
     string = ''
     string += '()'*n
     string += '[]'*m
