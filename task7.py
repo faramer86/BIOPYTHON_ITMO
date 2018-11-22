@@ -44,7 +44,7 @@ def subpalindrome(Str):
             left = noncache(Str[:-1])
             right = noncache(Str[1:])
             recursedList = [left, right]
-            cache[Str] = max(recursedList, key=len)
+            cache[Str] = max(sorted(recursedList), key=len)
             return cache[Str]
     return noncache(Str)
 
