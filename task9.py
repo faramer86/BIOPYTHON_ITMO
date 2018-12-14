@@ -112,7 +112,12 @@ class Directory(FSItem):
             raise FileSystemError(
                 "Can't show instances inside of directory: {0} already exist".format(self.get_path_name()))
         else:
-            yield os.listdir(self.path)
+            for file in os.listdir(self.path):
+                if os.path.isfile(os.path.join(self.path, file)):
+                    yield File(os.path.join(self.path, file))
+                else:
+                    if os.path.isdir(os.path.join(self.path, file)):
+                        yield Directory(os.path.join(self.path, file))
 
     def files(self):
         ''' Yields File instances of files inside of current directory
