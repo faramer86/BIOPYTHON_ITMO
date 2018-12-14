@@ -104,6 +104,7 @@ class Directory(FSItem):
                 "Can't create directory: {0} already exist".format(self.get_path_name()))
         else:
             self.path = path
+            self.name = os.path.split(path)[1]
 
     def items(self):
         ''' Yields FSItem instances of items inside of current directory
