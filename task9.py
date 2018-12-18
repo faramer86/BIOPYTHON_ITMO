@@ -12,8 +12,8 @@ class FSItem(object):
     def __init__(self, path):
         ''' Creates new FSItem instance by given path to file '''
         self.path = path
-        self.name = name
-
+        self.name = os.path.split(path)[1]
+        
     def rename(self, newname):
         ''' Renames current item
                 raise FileSystemError if item does not exist
@@ -21,9 +21,12 @@ class FSItem(object):
         if os.path.exists(self.path) and self.name != self.newname:
             if os.path.exists(os.path.join(self.path, self.newname)) == False:
                 os.rename(self.name, self.newname)
+            else:
+                raise FileSystemError(
+                "Can't rename file: {0} already exist".format(os.path.join(self.path, self.newname)))
         else:
             raise FileSystemError(
-                "Can't rename file: {0} already exist".format(self.getname()))
+                "Can't rename file: {0} already exist".format(self.newname))
 
     def getname(self):
         ''' Returns name of current item '''
@@ -97,7 +100,7 @@ class Directory(FSItem):
                 raise FileSystemError if there exists file with the same path '''
         if os.path.isfile(path):
             raise FileSystemError(
-                "Can't create directory: {0} already exist".format(self.get_path_name()))
+                "Can't create directory: {0} is file".format(self.get_path_name()))
         else:
             self.path = path
             self.name = os.path.split(path)[1]
@@ -124,8 +127,8 @@ class Directory(FSItem):
         if os.path.exists(self.path) == False and isdirectory(self.path) == False:
             raise FileSystemError()
         else:
-            for i in filter(lambda file: os.path.isfile(os.path.join(self.path, file)), list(os.listdir(self.path))):
-                yield i
+            for file in filter(lambda file: os.path.isfile(os.path.join(self.path, file)), list(os.listdir(self.path))):
+                yield File(os.path.join(self.path, file))
 
     def subdirectories(self):
         ''' Yields Directory instances of directories inside of current directory
@@ -133,8 +136,8 @@ class Directory(FSItem):
         if os.path.exists(self.path) == False:
             raise FileSystemError()
         else:
-            for i in filter(lambda file: os.path.isdir(os.path.join(self.path, file)), list(os.listdir(self.path))):
-                yield i
+            for directory in filter(lambda file: os.path.isdir(os.path.join(self.path, file)), list(os.listdir(self.path))):
+                yield Directory(os.path.join(self.path, directory))
 
     def filesrecursive(self):
         ''' Yields File instances of files inside of this directory,
@@ -146,7 +149,7 @@ class Directory(FSItem):
                     yield File(os.path.join(self.path, file))
                 else:
                     for subitem in Directory(os.path.join(self.path, file)).filesrecursive():
-                        yield subitem
+                        yield type(subitem)
         except FileNotFoundError:
             raise FileSystemError('Path {} not found'.format({self.path}))
 
@@ -168,3 +171,4 @@ class Directory(FSItem):
                                   format(os.path.join(self.path, name)))
         else:
             return Directory(os.path.join(self.path, name))
+
