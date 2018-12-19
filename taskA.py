@@ -3,6 +3,7 @@ import sys
 import numpy
 import shutil
 from task9 import *
+from pathlib import Path
 
 def main(args):
     cwd = Directory(os.getcwd())
@@ -28,19 +29,15 @@ def main(args):
             new_path = ''.join(cmdargs)
             if os.path.isdir(new_path):
                 path = new_path
-                if path.startswith('/'):
-                    cwd = Directory(cwd.get_path_name() + path)
-                    os.chdir(cwd.get_path_name())
-                else:
-                    if '../' in new_path :
-                        for count in range(new_path.count('../')):
-                            cwd = Directory(os.path.split(cwd.get_path_name())[0])
-                            os.chdir(cwd.get_path_name())
-                    else:
-                        cwd = Directory(cwd.get_path_name() + '/' + path)
+                if '..' in new_path :
+                    for count in range(new_path.count('..')):
+                        cwd = Directory(os.path.split(cwd.get_path_name())[0])
                         os.chdir(cwd.get_path_name())
+                else:
+                    cwd = Directory(os.path.join(cwd.get_path_name(), path))
+                    os.chdir(cwd.get_path_name())
             elif not cmdargs or cmdargs == ['~/']:
-                path = '/home/' + user_name
+                path = str(Path.home())
                 cwd = Directory(path)
                 os.chdir(cwd.get_path_name())
             else:
