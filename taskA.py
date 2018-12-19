@@ -7,7 +7,6 @@ from pathlib import Path
 
 def main(args):
     cwd = Directory(os.getcwd())
-    user_name = cwd.get_path_name().split('/')[2]
     while True:
         cmdtokens = input('{path}$ '.format(path=cwd.path)).split()
         if not cmdtokens:
