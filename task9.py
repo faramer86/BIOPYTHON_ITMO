@@ -23,6 +23,7 @@ class FSItem(object):
                 new_path = os.path.join(os.path.split(self.path)[0], newname)
                 os.rename(self.path, new_path)
                 self.path = new_path
+                self.name = os.path.split(new_path)[1]
             else:
                 raise FileSystemError(
                 "Can't rename file: {0} already exist".format(os.path.join(self.path, newname)))
@@ -173,3 +174,9 @@ class Directory(FSItem):
                                   format(os.path.join(self.path, name)))
         else:
             return Directory(os.path.join(self.path, name))
+
+
+f = File('a')
+f.create()
+f.rename('b')
+print(f.getname())
