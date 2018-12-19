@@ -174,9 +174,3 @@ class Directory(FSItem):
                                   format(os.path.join(self.path, name)))
         else:
             return Directory(os.path.join(self.path, name))
-
-
-f = File('a')
-f.create()
-f.rename('b')
-print(f.getname())

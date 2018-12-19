@@ -92,6 +92,12 @@ def main(args):
             old_name = cmdargs[0]
             new_name = cmdargs[1]
             shutil.copy(old_name, new_name)
+        elif cmd == 'rm':
+            item = ''.join(cmdargs)
+            if FSItem(item).isfile():
+                os.remove(item)
+            elif FSItem(item).isdirectory():
+                shutil.rmtree(item)
         elif cmd == 'exit':
             print("Bye bye!")
             break
