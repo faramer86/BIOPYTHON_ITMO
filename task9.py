@@ -18,15 +18,17 @@ class FSItem(object):
         ''' Renames current item
                 raise FileSystemError if item does not exist
                 raise FileSystemError if item "newname" already exists '''
-        if os.path.exists(self.path) and self.name != self.newname:
-            if os.path.exists(os.path.join(self.path, self.newname)) == False:
-                os.rename(self.name, self.newname)
+        if os.path.exists(self.path) and self.name != newname:
+            if os.path.exists(os.path.join(self.path, newname)) == False:
+                new_path = os.path.join(os.path.split(self.path)[0], newname)
+                os.rename(self.path, new_path)
+                self.path = new_path
             else:
                 raise FileSystemError(
-                "Can't rename file: {0} already exist".format(os.path.join(self.path, self.newname)))
+                "Can't rename file: {0} already exist".format(os.path.join(self.path, newname)))
         else:
             raise FileSystemError(
-                "Can't rename file: {0} already exist".format(self.newname))
+                "Can't rename file: {0} already exist".format(newname))
 
     def getname(self):
         ''' Returns name of current item '''
@@ -149,7 +151,7 @@ class Directory(FSItem):
                     yield File(os.path.join(self.path, file))
                 else:
                     for subitem in Directory(os.path.join(self.path, file)).filesrecursive():
-                        yield type(subitem)
+                        yield subitem
         except FileNotFoundError:
             raise FileSystemError('Path {} not found'.format({self.path}))
 
@@ -171,4 +173,3 @@ class Directory(FSItem):
                                   format(os.path.join(self.path, name)))
         else:
             return Directory(os.path.join(self.path, name))
-
