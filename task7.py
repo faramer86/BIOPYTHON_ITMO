@@ -120,30 +120,21 @@ def fibonacci(n):
 # 3rd
 
 
+
 def brackets2(n, m):
-    string = ''
-    string += '()'*n
-    string += '[]'*m
-    cache = []
-    count1 = 0
-    count2 = 0
-    for i in itertools.permutations(string, 2*(n+m)):
-        result = True
-        for j in list(i):
-            if j == ')':
-                count1 -= 1
-                if count1 < 0:
-                    result = False
-            if j == ']':
-                count2 -= 1
-                if count2 < 0:
-                    result = False
-            if j == '(':
-                count1 += 1
-            if j == '[':
-                count2 += 1
-        if result is True:
-            print(i)
-            result = True
-        count1 = 0
-        count2 = 0
+    def unique_permutations(iterable, r=None):
+        previous = tuple()
+        for p in itertools.permutations(sorted(iterable), r):
+            if p > previous:
+                previous = p
+                yield p
+    brackets = ["()", "[]"]
+    a = "()"*n + "[]"*m
+    for e in unique_permutations(a):
+        b = "".join(e)
+        r = b
+        while any(x in b for x in brackets):
+            for br in brackets:
+                b = b.replace(br, '')
+        if b == '':
+            yield r
