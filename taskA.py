@@ -46,14 +46,14 @@ def main(args):
             if os.path.isfile(new_path):
                 with open(new_path, 'r') as file:
                     for line in file:
-                        print(line)
+                        print(line.rstrip())
         elif cmd == 'head':
             number_of_rows = 10
             new_path = ''.join(cmdargs)
             if os.path.isfile(new_path):
                 with open(new_path, 'r') as file:
                     while number_of_rows != 0:
-                        print(file.readline())
+                        print(file.readline().rstrip())
                         number_of_rows -= 1
         elif cmd == 'tail':
             number_of_rows = 10
@@ -62,7 +62,7 @@ def main(args):
                 with open(new_path, 'r') as file:
                      my_lines = file.readlines()
                      for line in my_lines[-number_of_rows:]:
-                        print(line)
+                        print(line.rstrip())
         elif cmd == 'pwd':
             print(os.getcwd())
         elif cmd == 'touch':
@@ -79,8 +79,6 @@ def main(args):
         elif cmd == 'mv':
             old_name = cmdargs[0]
             new_name = cmdargs[1]
-            print(os.path.isfile(old_name))
-            print(os.path.isfile(new_name))
             if os.path.exists(old_name) and os.path.exists(os.path.join(os.getcwd(), new_name)) == False:
                 os.rename(old_name, new_name)
             elif os.path.isfile(old_name) and os.path.isdir(new_name):
@@ -90,7 +88,10 @@ def main(args):
         elif cmd == 'cp':
             old_name = cmdargs[0]
             new_name = cmdargs[1]
-            shutil.copy(old_name, new_name)
+            if os.path.isfile(old_name) and os.path.isdir(new_name):
+                shutil.copy(old_name, new_name)
+            else:
+                print("Error: wrong input")
         elif cmd == 'rm':
             item = ''.join(cmdargs)
             if FSItem(item).isfile():
