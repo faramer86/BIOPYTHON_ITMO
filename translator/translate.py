@@ -64,14 +64,18 @@ if __name__ == '__main__':
 		languages = [list_with_words[i].upper() for i in range(0,len(list_with_words),2)]
 		words = [list_with_words[i] for i in range(1,len(list_with_words),2)]
 		ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
+		string_for_file = '%s ' % popularity
 		for language, word in zip(languages, words):
+			string_for_file += language.title() + ':' + word + ' '
 			if language not in dictionary:
 				dictionary[language] = dict()
 				dictionary[language][ID] = (word, popularity)
 			else:
 				dictionary[language][ID] = (word, popularity)
+		with open('dict-Kolosov.tr', 'a') as file:
+			file.writelines(string_for_file + '\n')
+		
 
-	
 	elif sys.argv[1] == '?':
 		translated_phrase = translated_phrase(sys.argv[2].upper(), sys.argv[3].upper(), sys.argv[4:])
 		if translated_phrase != None:
