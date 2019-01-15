@@ -72,11 +72,16 @@ def generate_variables(popularity, list_with_words):
 
 if __name__ == '__main__':
 
+	# generate new dictionary from file
+	# as keys - languages, as values - other dict
+	# inside that dict ID:(word, popularity)
     with open('dict-Kolosov.tr', 'r') as file:
         dictionary = new_dictionary_generation(file)
 
     if sys.argv[1] == '+':
         var = generate_variables(int(sys.argv[2]), sys.argv[3:])
+        # Add new words to dict using languages as keys
+        # With each meaning of word store popularity
         for language, word in zip(var[2], var[3]):
             var[5] += language.title() + ':' + word + ' '
             if language not in dictionary:
@@ -84,6 +89,7 @@ if __name__ == '__main__':
                 dictionary[language][var[4]] = (word, var[0])
             else:
                 dictionary[language][var[4]] = (word, var[0])
+        # Add new line to file
         with open('dict-Kolosov.tr', 'a') as file:
             file.writelines(var[5] + '\n')
 
@@ -94,11 +100,15 @@ if __name__ == '__main__':
             print(translated_phrase)
 
     elif sys.argv[1] == '!':
+    	# figure out unknown language
         from_language = translate_unknown_language(
             dictionary, sys.argv[2].upper(), sys.argv[3:])
+        # translate phrase to other language
         final_phrase = translate_phrase(
             dictionary, from_language, sys.argv[2].upper(), sys.argv[3:])
         if final_phrase != None:
+        	# first line - unknown language
+        	# second line - translated phrase
             print(from_language, '\n', final_phrase, sep ='')
     else:
         print('There is no such <arg_1>. Please, choose: + or ! or ?')
