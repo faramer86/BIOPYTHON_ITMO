@@ -99,6 +99,6 @@ if __name__ == '__main__':
         final_phrase = translate_phrase(
             dictionary, from_language, sys.argv[2].upper(), sys.argv[3:])
         if final_phrase != None:
-            print(final_phrase)
+            print(from_language, '\n', final_phrase, sep ='')
     else:
         print('There is no such <arg_1>. Please, choose: + or ! or ?')
