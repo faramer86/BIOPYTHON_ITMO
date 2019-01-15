@@ -5,17 +5,17 @@ import random as rd
 def new_dictionary_generation(file):
 	dictionary = dict()
 	for line in file:
-			line = line.strip().split()
-			popularity = int(line[0])
-			words = line[1:]
-			ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
-			for word in words:
-				word = word.split(':')
-				language = word[0].upper()
-				if language in dictionary:
-					dictionary[language][ID] = (word[1], popularity)
-				else:
-					dictionary[language] = {ID:(word[1], popularity)}
+		line = line.replace(': ', ':').strip().split()
+		popularity = int(line[0])
+		words = line[1:]
+		ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
+		for word in words:
+			word = word.split(':')
+			language = word[0].upper()
+			if language in dictionary:
+				dictionary[language][ID] = (word[1], popularity)
+			else:
+				dictionary[language] = {ID:(word[1], popularity)}
 	return dictionary
 
 def translated_phrase(from_language, to_language, phrase):
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
 	with open('dict-Kolosov.tr', 'r') as file:
 		dictionary = new_dictionary_generation(file)
-		
+	
 	if sys.argv[1] == '+':
 		popularity = int(sys.argv[2])
 		list_with_words = sys.argv[3:]
@@ -70,6 +70,7 @@ if __name__ == '__main__':
 				dictionary[language][ID] = (word, popularity)
 			else:
 				dictionary[language][ID] = (word, popularity)
+
 	
 	elif sys.argv[1] == '?':
 		translated_phrase = translated_phrase(sys.argv[2].upper(), sys.argv[3].upper(), sys.argv[4:])
@@ -78,6 +79,8 @@ if __name__ == '__main__':
 
 	elif sys.argv[1] == '!':
 		from_language = translate_unknown_language(sys.argv[2].upper(), sys.argv[3:])
-		print(translated_phrase(from_language, sys.argv[2].upper(), sys.argv[3:]))
+		final_phrase = translated_phrase(from_language, sys.argv[2].upper(), sys.argv[3:])
+		if final_phrase != None:
+			print(translated_phrase)
 	else:
 		print('There is no such <arg_1>. Please, choose: + or ! or ?')
