@@ -3,22 +3,26 @@ import sys
 import random as rd
 
 
+def dict_variables(line):
+	popularity = int(line[0])
+	words = line[1:]
+	ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
+	return popularity, words, ID 
+
+
 def new_dictionary_generation(file):
     dictionary = dict()
     for line in file:
         line = line.replace(': ', ':').strip().split()
-        popularity = int(line[0])
-        words = line[1:]
-        ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
-        for word in words:
+        variables = dict_variables(line)
+        for word in variables[1]:
             word = word.split(':')
             language = word[0].upper()
             if language in dictionary:
-                dictionary[language][ID] = (word[1], popularity)
+                dictionary[language][variables[2]] = (word[1], variables[0])
             else:
-                dictionary[language] = {ID: (word[1], popularity)}
+                dictionary[language] = {variables[2]: (word[1], variables[0])}
     return dictionary
-
 
 def translate_phrase(dictionary, from_language, to_language, phrase):
     whole_phrase = ''
@@ -46,8 +50,8 @@ def translate_unknown_language(dictionary, to_language, phrase):
     whole_phrase = ''
     popularity_score = dict()
     for word in phrase:
-        for language, values in dictionary.items():
-            for value in values.values():
+        for language, IDs in dictionary.items():
+            for value in IDs.values():
                 if word.casefold() == value[0].casefold():
                     if language not in popularity_score:
                         popularity_score[language] = 0
@@ -110,5 +114,6 @@ if __name__ == '__main__':
         	# first line - unknown language
         	# second line - translated phrase
             print(from_language, '\n', final_phrase, sep ='')
+    
     else:
         print('There is no such <arg_1>. Please, choose: + or ! or ?')
