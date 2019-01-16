@@ -7,7 +7,7 @@ def dict_variables(line):
 	popularity = int(line[0])
 	words = line[1:]
 	ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
-	return popularity, words, ID 
+	return [popularity, words, ID]
 
 
 def new_dictionary_generation(file):
@@ -23,6 +23,7 @@ def new_dictionary_generation(file):
             else:
                 dictionary[language] = {variables[2]: (word[1], variables[0])}
     return dictionary
+
 
 def translate_phrase(dictionary, from_language, to_language, phrase):
     whole_phrase = ''
@@ -71,7 +72,7 @@ def generate_variables(popularity, list_with_words):
     words = [list_with_words[i] for i in range(1, len(list_with_words), 2)]
     ID = int(str(rd.randrange(0, 10**8)) + str(rd.randrange(0, 10**8)))
     string_for_file = '%s ' % popularity
-    return popularity, list_with_words, languages, words, ID, string_for_file
+    return [popularity, list_with_words, languages, words, ID, string_for_file]
 
 
 if __name__ == '__main__':
@@ -79,6 +80,7 @@ if __name__ == '__main__':
 	# generate new dictionary from file
 	# as keys - languages, as values - other dict
 	# inside that dict ID:(word, popularity)
+
     with open('dict-Kolosov.tr', 'r') as file:
         dictionary = new_dictionary_generation(file)
 
@@ -87,12 +89,15 @@ if __name__ == '__main__':
         # Add new words to dict using languages as keys
         # With each meaning of word store popularity
         for language, word in zip(var[2], var[3]):
-            var[5] += language.title() + ':' + word + ' '
-            if language not in dictionary:
-                dictionary[language] = dict()
-                dictionary[language][var[4]] = (word, var[0])
-            else:
-                dictionary[language][var[4]] = (word, var[0])
+        	print(var[5])
+        	print(language)
+        	print(word)
+        	var[5] += language.title() + ':' + word + ' '
+        	if language not in dictionary:
+        		dictionary[language] = dict()
+        		dictionary[language][var[4]] = (word, var[0])
+        	else:
+        		dictionary[language][var[4]] = (word, var[0])
         # Add new line to file
         with open('dict-Kolosov.tr', 'a') as file:
             file.writelines(var[5] + '\n')
@@ -102,6 +107,8 @@ if __name__ == '__main__':
             dictionary, sys.argv[2].upper(), sys.argv[3].upper(), sys.argv[4:])
         if translated_phrase != None:
             print(translated_phrase)
+        else:
+        	print('Error!')
 
     elif sys.argv[1] == '!':
     	# figure out unknown language
@@ -114,6 +121,8 @@ if __name__ == '__main__':
         	# first line - unknown language
         	# second line - translated phrase
             print(from_language, '\n', final_phrase, sep ='')
+        else:
+        	print('Error!')
     
     else:
         print('There is no such <arg_1>. Please, choose: + or ! or ?')
