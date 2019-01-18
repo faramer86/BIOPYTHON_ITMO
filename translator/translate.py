@@ -30,28 +30,33 @@ def new_dictionary_generation(file):
 
 
 def translate_phrase(dictionary, from_language, to_language, phrase):
-    if from_language == [] or to_language == [] or phrase == []:
-        print('Input Error! Still not enough arguments!')
-        sys.exit()
-    whole_phrase = ''
-    for word in phrase:
-        if word.casefold() in list(map(lambda x: x[0].casefold(), dictionary[from_language].values())):
-            extracted_ID = list(filter(lambda x: word.casefold() in x, map(lambda x: (
-                x[0], x[1][0].casefold()), dictionary[from_language].items())))[0][0]
-            try:
-                translation_of_word = dictionary[to_language][extracted_ID][0]
-            except KeyError:
-                print('There is not any %s language translations of word "%s" in dictionary! Check input or dictionary!' % (
-                    to_language, word))
-                sys.exit()
-            modified_new_word = ''.join(list(map(lambda a, b: b.lower() if a.islower() else b.upper(
-            ), word, translation_of_word))) + str(translation_of_word[len(word):].lower())
-            whole_phrase += modified_new_word + ' '
-        else:
-            print(
-                'Source language in dictionary do NOT contain all the words from the phrase!')
-            sys.exit()
-    return whole_phrase
+	if from_language == [] or to_language == [] or phrase == []:
+		print('Input Error! Still not enough arguments!')
+		sys.exit()
+	whole_phrase = ''
+	for word in phrase:
+		try:
+			if word.casefold() in list(map(lambda x: x[0].casefold(), dictionary[from_language].values())):
+				extracted_ID = list(filter(lambda x: word.casefold() in x, map(lambda x: (
+					x[0], x[1][0].casefold()), dictionary[from_language].items())))[0][0]
+				try:
+					translation_of_word = dictionary[to_language][extracted_ID][0]
+				except KeyError:
+					print('There is not any %s language translations of word "%s" in dictionary! Check input or dictionary!' % (
+						to_language, word))
+					sys.exit()
+				modified_new_word = ''.join(list(map(lambda a, b: b.lower() if a.islower() else b.upper(
+				), word, translation_of_word))) + str(translation_of_word[len(word):].lower())
+				whole_phrase += modified_new_word + ' '
+			else:
+				print(
+					'Source language in dictionary do NOT contain all the words from the phrase!')
+				sys.exit()
+		except KeyError:
+			print('Error with language variables!' % (
+						to_language, word))
+			sys.exit()
+	return whole_phrase
 
 
 def translate_unknown_language(dictionary, to_language, phrase):
