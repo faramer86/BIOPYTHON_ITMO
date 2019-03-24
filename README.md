@@ -1,2 +1,2 @@
-# BIOPYTHON_ITMO_2018
+# BIOPYTHON_ITMO
 #some homework from python classes in ITMO
