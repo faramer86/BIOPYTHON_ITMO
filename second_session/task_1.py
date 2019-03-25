@@ -2,8 +2,6 @@ from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna
 from Bio.Data import CodonTable
 
-dna = Seq("AGTACTAGAGCATTCTATGGAG", generic_dna)
-
 
 def proteins_from_dna(seq, table_type=2):
     import itertools as tl
@@ -21,5 +19,7 @@ def proteins_from_dna(seq, table_type=2):
     return sorted(result)
 
 
-print(proteins_from_dna(dna, 1))
-print(proteins_from_dna(dna, 2))
+if __name__ == "__main__":
+    dna = Seq("AGTACTAGAGCATTCTATGGAG", generic_dna)
+    print(proteins_from_dna(dna, 1))  # with standard_table
+    print(proteins_from_dna(dna, 2))  # with mito_table
