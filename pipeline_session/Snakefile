@@ -1,0 +1,9 @@
+rule copy: # can be random name
+	input: "out.txt"
+	output: "copy.txt"
+	shell: "cp {input} {output}"
+
+rule generate:
+	output: "out.txt"
+	shell: "touch {output}"
+
